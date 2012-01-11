@@ -1,5 +1,8 @@
-* History 
- - Jonas Stein 2012-01-11
- - Tom Short 2004-11-07
- - Emmanuel Paradis
+* History of this document
+ - Jonas Stein CC-BY-SA 2012-01-11
+ - Tom Short granted to the public domain 2004-11-07 and got permission to include material from
+ - Emmanuel Paradis (R for Beginners) 
 
+* License CC BY-SA 
+ - http://creativecommons.org/licenses/by-sa/3.0/
+ - http://creativecommons.org/licenses/by-sa/3.0/legalcode

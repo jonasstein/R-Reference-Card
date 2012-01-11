@@ -1,12 +1,25 @@
-% by Tom Short, tshort@epri-peac.com, EPRI PEAC
-% granted to the public domain
 \documentclass[10pt,landscape]{article}
-%\documentclass[10pt,portrait]{article}
 \usepackage{pslatex}
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{color}
+
+\usepackage{hyperref}
+\usepackage[]{url}
+\hypersetup{%
+  colorlinks=true,  
+  linkcolor = black,
+  citecolor = black, 
+  urlcolor = blue, 
+  pdfpagemode=UseNone, 
+  pdfstartview=FitH,
+  pdfauthor= {Jonas Stein, Tom Short, Emanuel Paradis},
+  pdftitle= R Reference Card
+}
+
+\urlstyle{same}
+
 
 % Turn off header and footer
 \pagestyle{empty}
@@ -67,23 +80,23 @@
 \setlength{\columnsep}{2pt}
 
 \begin{center}
-     \Large{\textbf{\color{blue}R Reference Card}} \\
+     {\Large{\textbf{\color{blue}R Reference Card}}} \\
+ \today
 \end{center}
-
-by Tom Short, EPRI PEAC, tshort@epri-peac.com    2004-10-21\\
-Granted to the public domain. See www.Rpad.org for the source and latest version.
-Includes material from \emph{R for Beginners} by Emmanuel Paradis (with permission).
+\href{mailto:news@jonasstein.de}{Jonas Stein} maintains 
+the source since 2012 on \href{https://github.com/jonasstein/R-Reference-Card}{github} feel free to contact him for contributions.
+Parent versions by Tom Short, includes material from 
+\href{http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf}{R for Beginners} 
+by courtesy of Emmanuel Paradis.
 
 
 
 \section{Getting help}
 \everypar={\hangindent=9mm}
 
-Most R functions have online documentation.
+\bcode{help(topic)} documentation on \code{topic} 
 
-\bcode{help(topic)} documentation on \code{topic}
-
-\bcode{?topic} id.
+\bcode{?topic} short alternative to \code{help}
 
 \bcode{help.search("topic")} search the help system 
 
@@ -92,7 +105,7 @@ matching the regular expression "topic"
 
 \bcode{help.start()} start the HTML version of help
 
-\bcode{str(a)} display the internal *str*ucture of an R object
+\bcode{str(a)} display the internal structure of an R object
 
 \bcode{summary(a)} gives a ``summary'' of \code{a}, usually a
 statistical summary but it is \emph{generic} meaning it has different operations for different
@@ -117,6 +130,8 @@ of class a
 \everypar={\hangindent=9mm}
 
 \bcode{load()} load the datasets written with \code{save}
+
+\bcode{source("my.R")} includes and executes my.R in this place
 
 \bcode{data(x)} loads specified data sets
 
@@ -236,12 +251,7 @@ others
 \bcode{cbind(...)} id. by columns
 
 
-
-
-
-\section{Slicing and extracting data}
-
-Indexing vectors
+\section{addressing vectors}
 
 \begin{tabular}{@{}l@{\ }l}
 \code{x[n]} & \code{n}$^{th}$ element\\
@@ -255,7 +265,7 @@ Indexing vectors
 \code{x[x \%in\% c("a","and","the")]} & elements in the given set\\
 \end{tabular}
 
-Indexing lists\\*
+\section{addressing lists}
 \samepage\begin{tabular}{@{}l@{\ }l}
 \code{x[n]} & list with elements \code{n}\\
 \code{x[[n]]} & \code{n}$^{th}$ element of the list\\
@@ -263,8 +273,7 @@ Indexing lists\\*
 \code{x\$name} & id.\\
 \end{tabular}
 
-Indexing matrices
-
+\section{addressing matrices}
 \begin{tabular}{@{}l@{\ }l}
 \code{x[i,j]} & element at row \code{i}, column \code{j}\\
 \code{x[i,]} & row \code{i}\\
@@ -279,8 +288,6 @@ Indexing data frames (matrix indexing plus the following)
 \code{x[["name"]]} & column named \code{"name"}\\
 \code{x\$name} & id.\\
 \end{tabular}
-
-
 
 
 
@@ -721,7 +728,7 @@ parameters to plotting commands.
 
 \bcode{bty}  controls the type of box drawn around the plot, allowed values are: \code{"o"}, \code{"l"}, \code{"7"}, \code{"c"}, \code{"u"} ou \code{"]"} (the box looks like the corresponding character); if \code{bty="n"} the box is not drawn
 
-\bcode{cex}  a value controlling the size of texts and symbols with respect to the default; the following parameters have the same control for numbers on the axes, \code{cex.axis}, the axis labels, \code{cex.lab}, the title, \code{cex.main}, and the sub-title, \code{cex.sub}
+\bcode{cex}  a factor controlling the default size of texts and symbols; you can scale numbers on the axes, \code{cex.axis}, the axis labels, \code{cex.lab}, the title, \code{cex.main}, and the sub-title, \code{cex.sub}
 
 \bcode{col}  controls the color of symbols and lines; use color names:
 \code{"red"}, \code{"blue"} see \code{colors()} or as \code{"\#RRGGBB"};
@@ -746,7 +753,7 @@ and 25, or any single character within \code{""}
 
 \samepage\includegraphics[width=8.5cm]{pch_symbol} 
 
-\bcode{ps}  an integer which controls the size in points of texts and symbols
+\bcode{ps}   size in points of texts and symbols as integer
 
 \bcode{pty}  a character which specifies the type of the plotting region, \code{"s"}: square, \code{"m"}: maximal
 
