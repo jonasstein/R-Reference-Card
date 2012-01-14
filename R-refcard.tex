@@ -201,8 +201,6 @@ For database interaction, see packages \code{RODBC}, \code{DBI},
 
 
 
-
-
 \section{Data creation}
 \everypar={\hangindent=9mm}
 
@@ -251,6 +249,11 @@ others
 
 \bcode{cbind(...)} id. by columns
 
+
+\section{Data destruction}
+\bcode{rm(myvar)} removes object \code{myvar} from memory
+
+\bcode{rm(list = ls(all = TRUE))} removes all objects from memory
 
 \section{addressing vectors}
 

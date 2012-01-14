@@ -1,5 +1,5 @@
 # set latexfile to the name of the main file without the .tex
-latexfile = R-refcard.tex
+latexfile = R-refcard
 
 TEX = pdflatex
 
@@ -25,7 +25,7 @@ clean :
 	rm -f *.*~
 
 purge : clean
-	rm mf.pdf
+	rm  $(latexfile).pdf
 
 spellcheck:
 	hunspell -l -t -i utf-8 $(latexfile).tex
