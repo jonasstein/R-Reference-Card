@@ -32,3 +32,6 @@ spellcheck:
 
 test: 
 	chktex $(latexfile).tex
+
+upload:
+	lftp -f upload_pdf.lftp
