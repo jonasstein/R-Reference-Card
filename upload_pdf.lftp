@@ -1,0 +1,3 @@
+open ftp://cran.r-project.org/
+cd incoming/
+put R-refcard.pdf
