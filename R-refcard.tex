@@ -1,5 +1,5 @@
-\documentclass[10pt,landscape]{article}
-\usepackage{pslatex}
+\documentclass[8pt,landscape]{article}
+%\usepackage{pslatex}
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{calc}
@@ -97,6 +97,8 @@ by courtesy of Emmanuel Paradis.
 \bcode{help(topic)} documentation on \code{topic} 
 
 \bcode{?topic} short alternative to \code{help}
+
+\bcode{?.Machine} help about maximum values on your machine
 
 \bcode{help.search("topic")} search the help system 
 
@@ -299,10 +301,9 @@ Indexing data frames (matrix indexing plus the following)
 \everypar={\hangindent=9mm}
 
 \bcode{as.array(x), as.data.frame(x), as.numeric(x), as.logical(x),
-  as.complex(x), as.character(x), ...} convert type; for a complete list,
-  use \code{methods(as)}
-
-
+as.complex(x), as.character(x), ...} convert type;  \code{methods(as)} 
+shows a complete list
+ 
 
 
 \section{Variable information} 
@@ -429,23 +430,21 @@ decimals
 
 \bcode{cumsum(x)}  a vector which $i$th element is the sum from \code{x[1]} to \code{x[i]}
 
-\bcode{cumprod(x)}  id. for the product
+\bcode{cumprod(x)}  $f_i = \Pi_{j=1..i} x_j = (x_1, x_1 \cdot x_2, \dots)$
 
-\bcode{cummin(x)}  id. for the minimum
+\bcode{cummin(x)}  $f_i = \min(x_1 \dots x_i)$
 
 \bcode{cummax(x)}  id. for the maximum
 
 \bcode{union(x,y)},~\bcode{intersect(x,y)},~\bcode{setdiff(x,y)},~\bcode{setequal(x,y)}, \bcode{is.element(el,set)} ``set'' functions
 
-\bcode{Re(x)} real part of a complex number
+\bcode{Re(z), Im(z)} real and imaginary part of a complex number
 
-\bcode{Im(x)} imaginary part
+\bcode{Mod(z)} modulus; \code{abs(x)} is the same
 
-\bcode{Mod(x)} modulus; \code{abs(x)} is the same
+\bcode{Arg(z)} angle in radians of the complex number
 
-\bcode{Arg(x)} angle in radians of the complex number
-
-\bcode{Conj(x)} complex conjugate
+\bcode{Conj(z)} complex conjugate
 
 \bcode{convolve(x,y)} compute the several kinds of
      convolutions of two sequences
@@ -483,11 +482,7 @@ specify missing data (NA) removal.
 \bcode{colsum(x)}, \bcode{colSums(x)} id. for columns
 
 \bcode{rowMeans(x)} fast version of row means
-
 \bcode{colMeans(x)} id. for columns
-
-
-
 
 
 \section{Advanced data processing}
@@ -569,7 +564,7 @@ $+$ and $-$. \code{?DateTimeClasses} gives more information. See also package
 
 \bcode{as.Date(s)} and \bcode{as.POSIXct(s)} convert to the respective
 class; \code{format(dt)} converts to a string representation. The
-default string format is ``2001-02-21''. These accept a second argument
+default string format is ``2012-02-21''. These accept a second argument
 to specify a format for conversion. Some common formats are:
 
   \describe{
@@ -587,11 +582,12 @@ to specify a format for conversion. Some common formats are:
     \item{\code{\%U}} {Week (00--53); the first Sunday as day 1 of week 1.}
     \item{\code{\%w}} {Weekday (0--6, Sunday is 0).}
     \item{\code{\%W}} {Week (00--53); the first Monday as day 1 of week 1.}
-    \item{\code{\%y}} {Year without century (00--99). Don't use.}
+    \item{\code{\%y}} {Year without century (00--99). Avoid it.}
     \item{\code{\%Y}} {Year with century.}
-    \item{\code{\%z}} {(output only.) Offset from Greenwich; \code{-0800} is 8 hours west of.}
-    \item{\code{\%Z}} {(output only.) Time zone as a character
-      string (empty if not available).}
+    \item{\code{\%z}} {(read only) Offset from Greenwich; \code{-0800} 
+        is 8 hours west of.}
+    \item{\code{\%Z}} {(read only) Time zone as a character string 
+        (empty if not available).}
   }
 
 Where leading zeros are shown they will be used on output but are
@@ -605,9 +601,9 @@ optional on input. See \code{?strftime}.
 
 \everypar={\hangindent=9mm}
 
-\bcode{plot(x)}  plot of the values of \code{x} (on the $y$-axis) ordered on the $x$-axis
+\bcode{plot(y)}  plot of the values of \code{y} (on the $y$-axis) ordered on the $x$-axis
 
-\bcode{plot(x, y)}  bivariate plot of \code{x} (on the $x$-axis) and \code{y} (on the $y$-axis)
+\bcode{plot(x=xv, y=yv)}  bivariate plot of \code{xv} (on the $x$-axis) and \code{yv} (on the $y$-axis)
 
 \bcode{hist(x)}  histogram of the frequencies of \code{x}
 
