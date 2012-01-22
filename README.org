@@ -6,3 +6,6 @@
 * License CC BY-SA 
  - http://creativecommons.org/licenses/by-sa/3.0/
  - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+
+* Links
+ - pitfalls in R explained http://www.burns-stat.com/pages/Tutor/R_inferno.pdf
