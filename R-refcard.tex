@@ -87,9 +87,9 @@
 the source since 2012 on \href{https://github.com/jonasstein/R-Reference-Card}{github} feel free to contact him for contributions.
 Parent versions by Tom Short, includes material from 
 \href{http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf}{R for Beginners} 
-by courtesy of Emmanuel Paradis.
+by courtesy of Emmanuel Paradis.\\
 
-
+Examples in this document use the variables \code{df} = data frame object, \code{v} = vector, \code{s} = string,  \code{f} = filename as string all others are not yet rewritten.
 
 \section{Getting help}
 \everypar={\hangindent=9mm}
@@ -131,15 +131,13 @@ of class a
 \section{Input and output}
 \everypar={\hangindent=9mm}
 
-\bcode{load()} load the datasets written with \code{save}
-
 \bcode{source("my.R")} includes and executes my.R in this place
 
-\bcode{data(x)} loads specified data sets
+\bcode{data(f)} loads specified data sets
 
-\bcode{library(x)} load add-on packages
+\bcode{library(s)} load add-on packages
 
-\bcode{read.table(file)} reads a file in table format and
+\bcode{read.table(f)} reads a file in table format and
                 creates a data frame from it; the default separator
                 \code{sep=""} is any whitespace; use \code{header=TRUE}
                 to read the first line as a header of column names; use \code{as.is=TRUE} to
@@ -150,21 +148,25 @@ of class a
                 the help for options on row naming, NA treatment, and
                 others
 
-\bcode{read.csv("filename",header=TRUE)} id. but with defaults set for reading
+\bcode{read.csv(f,header=TRUE)} id. but with defaults set for reading
 comma-delimited files
 
-\bcode{read.delim("filename",header=TRUE)} id. but with defaults set for reading
+\bcode{read.delim(f",header=TRUE)} id. but with defaults set for reading
 tab-delimited files
 
-\bcode{read.fwf(file,widths,header=FALSE,sep="\t",as.is=FALSE)} read a table of \emph{f}ixed \emph{w}idth \emph{f}ormatted data into a
+\bcode{read.fwf(f,widths,header=FALSE,sep="\t",as.is=FALSE)} read a table of \emph{f}ixed \emph{w}idth \emph{f}ormatted data into a
      'data.frame'; \code{widths} is an integer vector, giving the widths of the fixed-width fields
 
-\bcode{save(file,...)} saves the specified objects (...) in the XDR
+
+\bcode{save(f,...)} saves the specified objects (...) in the XDR
 platform-independent binary format
 
-\bcode{save.image(file)} saves all objects
+\bcode{save.image(f)} saves all objects
 
-\bcode{cat(..., file="", sep=" ")} prints the arguments after coercing to
+\bcode{load(f)} load the datasets written with \code{save}
+
+
+\bcode{cat(..., file=f, sep=" ")} prints the arguments after coercing to
 character; \code{sep} is the character separator between arguments
 
 \bcode{print(a, ...)} prints its arguments; generic, meaning it can
@@ -172,7 +174,7 @@ have different methods for different objects
 
 \bcode{format(x,...)} format an R object for pretty printing
 
-\bcode{write.table(x,file="",row.names=TRUE,col.names=TRUE, sep=" ")} 
+\bcode{write.table(x, file=f,row.names=TRUE, col.names=TRUE, sep=" ")} 
 prints \code{x} after converting to a data frame; if \code{quote} is
                  \code{TRUE}, character or factor columns are
                  surrounded by quotes (\code{"}); \code{sep} is the field
@@ -182,7 +184,7 @@ prints \code{x} after converting to a data frame; if \code{quote} is
                  get the column headers aligned correctly for
                  spreadsheet input
 
-\bcode{sink(file)} output to \code{file}, until \code{sink()}
+\bcode{sink(f)} output to \code{f}, until \code{sink()}
 
 \everypar={\hangindent=0mm}
 Most of the I/O functions have a \code{file} argument. This can often
@@ -191,9 +193,8 @@ output. Connections can include files, pipes, zipped
 files, and R variables. 
 
 On windows, the file connection can also be used with \code{description =
-"clipboard"}. To read a table copied from Excel, use \\
+"clipboard"}. To exchange tables with office applications via clipboard, use \\
 \code{x <- read.delim("clipboard")}\\
-To write a table to the clipboard for Excel, use \\
 \code{write.table(x,"clipboard",sep="\textbackslash t",col.names=NA)}
 
 For database interaction, see packages \code{RODBC}, \code{DBI},
@@ -260,15 +261,15 @@ others
 \section{addressing vectors}
 
 \begin{tabular}{@{}l@{\ }l}
-\code{x[n]} & \code{n}$^{th}$ element\\
-\code{x[-n]} & all \emph{but} the \code{n}$^{th}$ element\\
-\code{x[1:n]} & first \code{n} elements\\
-\code{x[-(1:n)]} & elements from \code{n+1} to the end\\
-\code{x[c(1,4,2)]} & specific elements\\
-\code{x["name"]} & element named \code{"name"}\\
-\code{x[x > 3]} & all elements greater than 3\\
-\code{x[x > 3 \& x < 5]} & all elements between 3 and 5\\
-\code{x[x \%in\% c("a","and","the")]} & elements in the given set\\
+\code{v[n]} & \code{n}$^{th}$ element\\
+\code{v[-n]} & all \emph{but} the \code{n}$^{th}$ element\\
+\code{v[1:n]} & first \code{n} elements\\
+\code{v[-(1:n)]} & elements from \code{n+1} to the end\\
+\code{v[c(1,4,2)]} & specific elements\\
+\code{v["name"]} & element named \code{"name"}\\
+\code{v[x > 3]} & all elements greater than 3\\
+\code{v[x > 3 \& x < 5]} & all elements between 3 and 5\\
+\code{v[x \%in\% c("a","and","the")]} & elements in the given set\\
 \end{tabular}
 
 \section{addressing lists}
@@ -291,8 +292,8 @@ others
 Indexing data frames (matrix indexing plus the following)
 
 \begin{tabular}{@{}l@{\ }l}
-\code{x[["name"]]} & column named \code{"name"}\\
-\code{x\$name} & id.\\
+\code{df[["name"]]} & column named \code{"name"}\\
+\code{df\$name} & id.\\
 \end{tabular}
 
 
@@ -340,15 +341,12 @@ a vector as a one-row matrix
 \section{Data selection and manipulation}
 \everypar={\hangindent=9mm}
 
-\bcode{which.max(x)}  returns the index of the greatest element of
-\bcode{x}
+\bcode{which.max(v), which.min(v)}  returns the index of the maximum (minimum) element of
+\bcode{v}
 
-\bcode{which.min(x)}  returns the index of the smallest element of
-\bcode{x}
+\bcode{rev(v)}  reverses the elements of \code{v}
 
-\bcode{rev(x)}  reverses the elements of \code{x}
-
-\bcode{sort(x)}  sorts the elements of \code{x} in increasing order; to sort in decreasing order: \code{rev(sort(x))}
+\bcode{sort(v)}  sorts the elements of \code{v} in increasing order; to sort in decreasing order: \code{rev(sort(x))}
 
 \bcode{cut(x,breaks)}  divides \code{x} into intervals (factors);
 \code{breaks} is the number of cut intervals or a vector of cut points
@@ -380,10 +378,6 @@ a vector as a one-row matrix
 \everypar={\hangindent=9mm}
 
 \bcode{sin,cos,tan,asin,acos,atan,atan2,log,log10,exp}
-
-\bcode{max(x)}  maximum of the elements of \code{x}
-
-\bcode{min(x)}  minimum of the elements of \code{x}
 
 \bcode{range(x)}  id. then \code{c(min(x), max(x))}
 
@@ -420,7 +414,8 @@ data frame (1 if \code{x} is a vector)
 \bcode{round(x, n)}  rounds the elements of \code{x} to \code{n}
 decimals
 
-\bcode{log(x, base)}  computes the logarithm of \code{x} with base \code{base}
+\bcode{log(v, base)}  computes the logarithm of \code{x} with base \code{base} 
+\bcode{log10(v)}  \code{base} =10
 
 \bcode{scale(x)}  if \code{x} is a matrix, centers and reduces the data; to center only use the option \code{center=FALSE}, to reduce only \code{scale=FALSE} (by default \code{center=TRUE, scale=TRUE})
 
@@ -428,13 +423,13 @@ decimals
 
 \bcode{pmax(x,y,...)}  id. for the maximum
 
-\bcode{cumsum(x)}  a vector which $i$th element is the sum from \code{x[1]} to \code{x[i]}
+\bcode{cumsum(v)}  a vector which $i$th element is the sum from \code{x[1]} to \code{x[i]}
 
-\bcode{cumprod(x)}  $f_i = \Pi_{j=1..i} x_j = (x_1, x_1 \cdot x_2, \dots)$
+\bcode{cumprod(v)}  $f_i = \Pi_{j=1..i} x_j = (x_1, x_1 \cdot x_2, \dots)$
 
-\bcode{cummin(x)}  $f_i = \min(x_1 \dots x_i)$
+\bcode{cummin(v)}  $f_i = \min(x_1 \dots x_i)$
 
-\bcode{cummax(x)}  id. for the maximum
+\bcode{cummax(v)}  id. for the maximum
 
 \bcode{union(x,y)},~\bcode{intersect(x,y)},~\bcode{setdiff(x,y)},~\bcode{setequal(x,y)}, \bcode{is.element(el,set)} ``set'' functions
 
@@ -449,8 +444,7 @@ decimals
 \bcode{convolve(x,y)} compute the several kinds of
      convolutions of two sequences
 
-\bcode{fft(x)} Fast Fourier Transform of an array
-
+\bcode{fft(v)} Fast Fourier Transform
 \bcode{mvfft(x)} FFT of each column of a matrix
 
 \bcode{filter(x,filter)} applies linear filtering to a univariate time series or to each
@@ -524,13 +518,13 @@ subsetted by \code{INDEX}
 \section{Strings}
 \everypar={\hangindent=9mm}
 
-\bcode{paste(...)} concatenate vectors after converting to character;
-\code{sep=} is the string to separate terms (a single space is the default);
+\bcode{paste(s1,s2, sep=\" \")} concatenate vectors after converting to character; 
 \code{collapse=} is an optional string to separate ``collapsed'' results
+\bcode{paste0(s1,s2)} paste without seperator (since R 2.15)
 
-\bcode{substr(x,start,stop)} substrings in a character vector; can also assign, as \code{substr(x, start, stop) <- value}
+\bcode{substr(s,start,stop)} substrings in a character vector; can also assign, as \code{substr(s, start, stop) <- value}
 
-\bcode{strsplit(x,split)} split \code{x} according to the substring \code{split}
+\bcode{strsplit(s,split)} split \code{s} according to the substring \code{split}
 
 \bcode{grep(pattern,x)} searches for matches to \code{pattern}
      within \code{x}; see \code{?regex}
@@ -539,9 +533,7 @@ subsetted by \code{INDEX}
 regular expression matching \code{sub()} is the same but only
 replaces the first occurrence. 
 
-\bcode{tolower(x)} convert to lowercase
-
-\bcode{toupper(x)} convert to uppercase
+\bcode{tolower(s), toupper(s)} convert to lowercase (uppercase)
 
 \bcode{match(x,table)} a vector of the positions of first matches for the elements of \code{x} among \code{table}
 
@@ -549,7 +541,7 @@ replaces the first occurrence.
 
 \bcode{pmatch(x,table)} partial matches for the elements of \code{x} among \code{table}
 
-\bcode{nchar(x)} number of characters
+\bcode{nchar(s)} number of characters
 
 
 \section{\color{blue}Dates and Times}
