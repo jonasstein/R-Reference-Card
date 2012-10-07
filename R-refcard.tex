@@ -187,15 +187,13 @@ prints \code{x} after converting to a data frame; if \code{quote} is
 \bcode{sink(f)} output to \code{f}, until \code{sink()}
 
 \everypar={\hangindent=0mm}
-Most of the I/O functions have a \code{file} argument. This can often
-be a character string naming a file or a connection.  \code{file=""} means the standard input or
-output. Connections can include files, pipes, zipped
-files, and R variables. 
+Most of the I/O functions have a \code{file} argument and 
+means the standard input or output. Connections can include files, pipes, zipped
+files, clipboard and R variables.\\ 
 
-On windows, the file connection can also be used with \code{description =
-"clipboard"}. To exchange tables with office applications via clipboard, use \\
-\code{x <- read.delim("clipboard")}\\
-\code{write.table(x,"clipboard",sep="\textbackslash t",col.names=NA)}
+To exchange tables with office applications on windows via clipboard, use \\
+\code{df <- read.delim("clipboard")}\\
+\code{write.table(df,"clipboard",sep="\textbackslash t",col.names=NA)}
 
 For database interaction, see packages \code{RODBC}, \code{DBI},
 \code{RMySQL}, \code{RPgSQL}, \code{ROracle}, for other file formats see
@@ -212,8 +210,8 @@ forming a vector;
 with \code{recursive=TRUE} descends through lists combining all elements
 into one vector
 
-\bcode{from:to} generates a sequence; ``:'' has operator priority; 1:4
-+ 1 is ``2,3,4,5''
+\bcode{from:to} generates a sequence; ``:'' has operator priority; \code{1:4
++ 1} returns \code{[1] 1 2 3 4}
 
 \bcode{seq(from,to)} generates a sequence
 \code{by=} specifies increment; \code{length=} specifies desired length
@@ -247,10 +245,8 @@ number of replications
 \bcode{expand.grid()} a data frame from all combinations of the supplied vectors
      or factors
 
-\bcode{rbind(...)} combine arguments by rows for matrices, data frames, and
-others
+\bcode{cbind(df1, df2), rbind(df1,df2)} combine arguments by columns (rows) for data frames and the like
 
-\bcode{cbind(...)} id. by columns
 
 
 \section{Data destruction}
@@ -355,8 +351,6 @@ a vector as a one-row matrix
 
 \bcode{which(x == a)}  returns a vector of the indices of \code{x} if the comparison operation is true (\T), in this example the values of \code{i} for which \code{x[i] == a} (the argument of this function must be a variable of mode logical)
 
-\bcode{choose(n, k)}  computes the combinations of $k$ events among $n$ repetitions = $n!/[(n-k)!k!]$
-
 \bcode{na.omit(x)}  suppresses the observations with missing data (\code{NA}) (suppresses the corresponding line if \code{x} is a matrix or a data frame)
 
 \bcode{na.fail(x)}  returns an error message if \code{x} contains at least one \code{NA}
@@ -411,6 +405,8 @@ data frame (1 if \code{x} is a vector)
 
 \bcode{cor(x, y)}  linear correlation between \code{x} and \code{y}, or correlation matrix if they are matrices or data frames
 
+\bcode{choose(n, k)}  computes the combinations of $k$ events among $n$ repetitions = $n!/[(n-k)!k!]$
+
 \bcode{round(x, n)}  rounds the elements of \code{x} to \code{n}
 decimals
 
@@ -464,7 +460,7 @@ specify missing data (NA) removal.
 
 \bcode{diag(x)} diagonal
 
-\bcode{\%*\%} matrix multiplication
+\bcode{\%*\%} matrix multiplication and scalar product
 
 \bcode{solve(a,b)} solves \code{a \%*\% x = b} for \code{x}
 
@@ -497,9 +493,9 @@ subsetted by \code{INDEX}
 
 \bcode{xtabs(a~b,data=x)} a contingency table from cross-classifying factors
 
-\bcode{aggregate(x,by,FUN)} splits the data frame \code{x} into subsets, computes summary statistics for
+\bcode{aggregate(df,by,FUN)} splits \code{df} into subsets, computes summary statistics for
      each, and returns the result in a convenient form; \code{by} is a
-     list of grouping elements, each as long as the variables in \code{x}
+     list of grouping elements, each as long as the variables in \code{df}
 
 \bcode{stack(x, ...)} transform data available as
      separate columns in a data frame or list into a single column
@@ -518,7 +514,7 @@ subsetted by \code{INDEX}
 \section{Strings}
 \everypar={\hangindent=9mm}
 
-\bcode{paste(s1,s2, sep=\" \")} concatenate vectors after converting to character; 
+\bcode{paste(s1,s2, sep=" ")} concatenate vectors after converting to character; 
 \code{collapse=} is an optional string to separate ``collapsed'' results
 \bcode{paste0(s1,s2)} paste without seperator (since R 2.15)
 
@@ -526,8 +522,7 @@ subsetted by \code{INDEX}
 
 \bcode{strsplit(s,split)} split \code{s} according to the substring \code{split}
 
-\bcode{grep(pattern,x)} searches for matches to \code{pattern}
-     within \code{x}; see \code{?regex}
+\bcode{grep(pattern,s)} search \code{pattern} in \code{s}; see \code{?regex}
 
 \bcode{gsub(pattern,replacement,x)} replacement of matches determined by
 regular expression matching \code{sub()} is the same but only
@@ -700,7 +695,7 @@ The following parameters are common to many plotting functions:
 
 \bcode{axis(side, vect)}  adds an axis at the bottom (\code{side=1}), on the left (\code{2}), at the top (\code{3}), or on the right (\code{4}); \code{vect} (optional) gives the abcissa (or ordinates) where tick-marks are drawn
 
-\bcode{rug(x)}  draws the data \code{x} on the $x$-axis as small vertical lines
+\bcode{rug(v)}  draws the data on the $x$-axis as small vertical lines
 
 \bcode{locator(n, type="n", ...)}  returns the coordinates ($x,y$) after the user has clicked \code{n} times on the plot with the mouse; also draws symbols (\code{type="p"}) or lines (\code{type="l"}) with respect to optional graphic parameters (\code{...}); by default nothing is drawn (\code{type="n"})
 
