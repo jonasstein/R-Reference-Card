@@ -35,3 +35,4 @@ test:
 
 upload:
 	lftp -f upload_pdf.lftp
+	echo "Now send mail to CRAN@R-project.org subject: CRAN submission R-refcard.pdf"
