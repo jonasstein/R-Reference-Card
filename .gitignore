@@ -2,3 +2,4 @@ auto/*
 *.aux
 *.pdf
 *.log
+/R-refcard.out
